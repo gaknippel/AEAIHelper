@@ -74,7 +74,7 @@ export function App() {
 
       console.log("5. sending data to python sever...");
 
-      const response = await fetch('http://127.0.0.1:5000/analyze-image',
+      const response = await fetch('https://aeaihelperbackend.onrender.com/analyze-image',
         {method: 'POST', body: formData,}
       );
 
