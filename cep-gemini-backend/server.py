@@ -4,6 +4,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from dotenv import load_dotenv
 import PIL.Image 
+import io
 
 
 load_dotenv()
@@ -14,15 +15,14 @@ CORS(app)
 
 model = genai.GenerativeModel('gemini-2.5-pro')
 
-@app.route('/analyze-text', methods=['POST'])
-def analyze_text():
+@app.route('/analyze-image', methods=['POST'])
+def analyze_image():
     try:
         if 'image' not in request.files:
             return jsonify({"error": "no image file provided"}), 400
         
 
         image_file = request.files['image']
-        # Get the prompt from the frontend's request
 
         prompt_from_user = request.form.get('prompt', 'analyze this image')
 
@@ -30,12 +30,12 @@ def analyze_text():
 
         prompt_from_user = f"{prompt_from_user}\n\n{constraint}"
 
-        img = PIL.Image.open(image_file.stream)
+        image_bytes = image_file.read()
 
-        # Call the Gemini API
+        img = PIL.Image.open(io.BytesIO(image_bytes))
+
         response = model.generate_content([prompt_from_user,img ])
 
-        # Send the response back to the frontend
         return jsonify({"suggestions": response.text})
 
     except Exception as e:

@@ -1,7 +1,5 @@
 import { useEffect, useState, StrictMode } from "react";
 import ReactDOM from 'react-dom/client';
-import ReactMarkdown from 'react-markdown';
-import rehypeRaw from 'rehype-raw';
 import Footer from '/CodeProjects/cep-gemini/src/components/Footer'
 import {
   csi,
@@ -13,9 +11,17 @@ import {
 import "./main.scss";
 import'./styles.css';
 
+
+function delay(ms: number)
+{
+  return new Promise(resolve=> setTimeout(resolve, ms));
+}
+
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
+
+console.log("1. starting analysis...")
 
 export function App() {
   const [prompt, setPrompt] = useState('Make this frame more cinematic and sad');
@@ -29,49 +35,50 @@ export function App() {
     setIsLoading(true);
     setGeminiResponse('');
     setError('');
+    
 
     try{
 
       const tempFilePath = path.join(os.tmpdir(), 'AEAI_frame.png');
-
-      const script = `
-        var activeItem = app.project.activeItem;
-        if (activeItem && activeItem instanceof CompItem) {
-          var savePath = "${tempFilePath.replace(/\\/g, '/')}";
-          activeItem.saveFrameToPng(activeItem.time, new File(savePath));
-          savePath; // Return the path as the result
-        } else {
-          "No active composition"; // Return an error string
-        }
-      `;
-
+      const safePath = tempFilePath.replace(/\\/g, '/');
 
       
-      const result = await evalES(script);
+      const script = `(function(){ var activeItem = app.project.activeItem; if (activeItem && activeItem instanceof CompItem) { var saveFile = new File("${safePath}"); activeItem.saveFrameToPng(activeItem.time, saveFile); return saveFile.fsName; } else { return "No active composition"; } })();`;
+
+      console.log("2. calling evalES to save frame...")
+
+      
+      const result = await evalES(script, true);
+
+      console.log("3. frame saved! result: ", result);
 
 
-      if (result === 'No active composition') {
+      if (result == 'No active composition') {
         throw new Error('Please select a composition before analyzing.');
       }
 
+      await delay(1000);
 
+
+
+      console.log("4. reading file from disk")
       const imageBuffer = fs.readFileSync(tempFilePath);
 
 
       const formData = new FormData();
 
-      formData.append(
-        'image',
-        new Blob([imageBuffer]),
-        'AEAI_frame.png'
-      );
+      formData.append('image', new Blob([imageBuffer]), 'AEAI_frame.png');
 
       formData.append('prompt', prompt);
 
 
+      console.log("5. sending data to python sever...");
+
       const response = await fetch('http://127.0.0.1:5000/analyze-image',
         {method: 'POST', body: formData,}
       );
+
+      console.log("6. python response recieved: ", response.status, response.statusText);
 
 
 
@@ -82,8 +89,16 @@ export function App() {
       }
 
 
+      console.log("7. parsing JSON from response...");
+
       const data = await response.json();
-      setGeminiResponse(data.suggestions);
+
+      console.log("8. JSON parsed: ", data);
+
+      const rawText = data.suggestions || "gemini returned an empty response.";
+      setGeminiResponse(rawText.replace(/\n/g, '<br />'));
+
+      console.log("9. STATE SET.")
     }
 
     catch (err: any)
@@ -137,11 +152,15 @@ return (
         {geminiResponse && (
           <div className="mt-6 bg-gray-800 p-4 rounded-lg border border-gray-700">
             <h2 className="text-lg font-semibold mb-2">Suggestions:</h2>
-            <div className="prose prose-invert prose-sm max-w-none">
-              <ReactMarkdown rehypePlugins={[rehypeRaw]}>
-                {geminiResponse}
-              </ReactMarkdown>
-            </div>
+
+            {
+
+            }
+            <div 
+              className="text-gray-300"
+              dangerouslySetInnerHTML={{ __html: geminiResponse }} 
+            />
+
           </div>
         )}
       </div>
