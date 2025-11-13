@@ -24,7 +24,7 @@ Use AEAI Helper to help you make a frame more cinematic, sad, happy, or... _anyt
 
 install [ZXP/UXP by aescripts.com](https://aescripts.com/learn/post/zxp-installer) to use this extension
 
-launch the program, and then drag and drop the **"AEAIHelperCEP.zxp"** in the program, and install it.
+launch the program, and then drag and drop the **"AEAIHelperCEP.zxp"** from the [release page](https://github.com/gaknippel/AEAIHelper/releases/tag/v1.0.1) into the program, and install it.
 
 finally, simply launch after effects and go to Window > Extensions > gemini CEP to open the extension.
 
@@ -36,14 +36,3 @@ Yes! AEAI Helper is **100% free and open source**, being released under the MIT 
 
 I would greatly appreciate it if you could provide a link back to my tool's info page in your product's site or about page:
 
-## Prerequisites
-
-- [Node.js 18](https://nodejs.org/en/) or later
-- Package manager either
-  - NPM (comes with Node.js)
-  - [Yarn](https://classic.yarnpkg.com/lang/en/docs/install/) ( ensure by running `yarn set version classic` )
-  - [PNPM](https://pnpm.io/installation) ( ensure by running `pnpm --version` )
-
-- Adobe CEP's PlayerDebugMode must be enabled on your machine to test `yarn build` or `yarn dev` builds. Only an installed ZXP with `yarn zxp` will work without PlayerDebugMode enabled.
-  - Enable this easily with the [aescripts ZXP Installer](https://aescripts.com/learn/zxp-installer/) > Settings > Debug > Enable Debugging
-  - Or enable manually per OS by following the CEP Cookbook Instructions: [Adobe CEP 12 Cookbook](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_12.x/Documentation/CEP%2012%20HTML%20Extension%20Cookbook.md#debugging-unsigned-extensions)
