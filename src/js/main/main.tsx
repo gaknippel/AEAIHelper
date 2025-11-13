@@ -1,6 +1,5 @@
 import { useEffect, useState, StrictMode } from "react";
 import ReactDOM from 'react-dom/client';
-import Footer from '/CodeProjects/cep-gemini/src/components/Footer'
 import {
   csi,
   evalES,
