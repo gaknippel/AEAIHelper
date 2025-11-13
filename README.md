@@ -1,6 +1,6 @@
 <img src="src/js/assets/bolt-cep.svg" alt="Bolt CEP" title="Bolt CEP" width="400" />
 
-this extention was built with Bolt Cep.
+this extention was built with Bolt CEP.
 
 ![npm](https://img.shields.io/npm/v/bolt-cep)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/hyperbrew/bolt-cep/blob/master/LICENSE)
@@ -24,7 +24,7 @@ Use AEAI Helper to help you make a frame more cinematic, sad, happy, or... _anyt
 
 install [ZXP/UXP by aescripts.com](https://aescripts.com/learn/post/zxp-installer) to use this extension
 
-launch the program, and then drag and drop the **"AEAIHelperCEP.zxp** in the program, and install it.
+launch the program, and then drag and drop the **"AEAIHelperCEP.zxp"** in the program, and install it.
 
 finally, simply launch after effects and go to Window > Extensions > gemini CEP to open the extension.
 
