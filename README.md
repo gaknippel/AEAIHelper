@@ -22,7 +22,13 @@ Use AEAI Helper to help you make a frame more cinematic, sad, happy, or... _anyt
 
 ### Installation Support 🙌
 
-If you have questions with getting started using AEAI Helper, contact _gaknippel@hotmail.com_
+install [ZXP/UXP by aescripts.com](https://aescripts.com/learn/post/zxp-installer) to use this extension
+
+launch the program, and then drag and drop the **"AEAIHelperCEP.zxp** in the program, and install it.
+
+finally, simply launch after effects and go to Window > Extensions > gemini CEP to open the extension.
+
+If you have questions with getting started using AEAI Helper, contact me @ _gaknippel@hotmail.com_
 
 ## Can I use AEAI in my free or commercial project?
 
