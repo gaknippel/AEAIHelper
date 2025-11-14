@@ -2,7 +2,7 @@ import React, {StrictMode} from "react";
 import ReactDOM from "react-dom/client";
 import { initBolt } from "../lib/utils/bolt";
 import "../index.scss";
-import { App } from "./main";
+import { App } from "./App";
 
 initBolt();
 

@@ -41,4 +41,4 @@ I would greatly appreciate it if you could provide a link back to my tool's info
 
 
 <img src="https://github.com/gaknippel/AEAIHelper/blob/main/src/js/assets/steamhappy-steam.gif"
-alt="steam happy :D" title="image title" width="200" height="150"/>
+alt="steam happy :D" title="happy :D" width="200" height="150"/>

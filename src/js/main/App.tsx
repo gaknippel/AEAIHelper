@@ -9,18 +9,24 @@ import {
 } from "../lib/utils/bolt";
 import "./main.scss";
 import'./styles.css';
-
+import SplitText from "../../ReactComponents/SplitText/SplitText";
+import Prism from "../../ReactComponents/Prism/Prism";
 
 function delay(ms: number)
 {
   return new Promise(resolve=> setTimeout(resolve, ms));
 }
 
+
+const handleAnimationComplete = () => {
+
+  console.log('All letters have animated!');
+
+};
+
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
-
-console.log("1. starting analysis...")
 
 export function App() {
   const [prompt, setPrompt] = useState('Make this frame more cinematic and sad');
@@ -44,12 +50,9 @@ export function App() {
       
       const script = `(function(){ var activeItem = app.project.activeItem; if (activeItem && activeItem instanceof CompItem) { var saveFile = new File("${safePath}"); activeItem.saveFrameToPng(activeItem.time, saveFile); return saveFile.fsName; } else { return "No active composition"; } })();`;
 
-      console.log("2. calling evalES to save frame...")
-
       
       const result = await evalES(script, true);
 
-      console.log("3. frame saved! result: ", result);
 
 
       if (result == 'No active composition') {
@@ -59,8 +62,6 @@ export function App() {
       await delay(1000);
 
 
-
-      console.log("4. reading file from disk")
       const imageBuffer = fs.readFileSync(tempFilePath);
 
 
@@ -71,14 +72,9 @@ export function App() {
       formData.append('prompt', prompt);
 
 
-      console.log("5. sending data to python sever...");
-
       const response = await fetch('https://aeaihelperbackend.onrender.com/analyze-image',
         {method: 'POST', body: formData,}
       );
-
-      console.log("6. python response recieved: ", response.status, response.statusText);
-
 
 
       if(!response.ok)
@@ -87,17 +83,12 @@ export function App() {
         throw new Error (errData.error || 'Error: ${response.statusText}');
       }
 
-
-      console.log("7. parsing JSON from response...");
-
       const data = await response.json();
 
-      console.log("8. JSON parsed: ", data);
-
       const rawText = data.suggestions || "gemini returned an empty response.";
+
       setGeminiResponse(rawText.replace(/\n/g, '<br />'));
 
-      console.log("9. STATE SET.")
     }
 
     catch (err: any)
@@ -115,7 +106,36 @@ return (
     <div className="bg-[#333333] text-gray-200 min-h-screen font-sans p-4">
       <div className="max-w-md mx-auto">
         <header className="mb-6 text-center">
-          <h1 className="text-xl font-bold">AEAI Helper</h1>
+
+          <h1>
+          <SplitText
+
+  text="AEAI Helper"
+
+  className="text-2xl font-semibold text-center"
+
+  delay={40}
+
+  duration={0.6}
+
+  ease="power3.out"
+
+  splitType="chars"
+
+  from={{ opacity: 0, y: 40 }}
+
+  to={{ opacity: 1, y: 0 }}
+
+  threshold={0.1}
+
+  rootMargin="-100px"
+
+  textAlign="center"
+
+  onLetterAnimationComplete={handleAnimationComplete}
+
+/>
+</h1>
           <p className="text-sm text-gray-400">suggestions for your shot!</p>
         </header>
 
