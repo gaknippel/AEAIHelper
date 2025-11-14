@@ -39,4 +39,6 @@ I would greatly appreciate it if you could provide a link back to my tool's info
 ## Follow me on YouTube!
 [My channel:](https://www.youtube.com/@critterfarts) I make souls-like videos and shorts, and just clips of me and my friends messing around 😃
 
-![alt text](https://github.com/gaknippel/AEAIHelper/tree/main/src/js/assets/steamhappy-steam.gif "hi guys!")
+
+<img src="https://github.com/gaknippel/AEAIHelper/blob/main/src/js/assets/steamhappy-steam.gif"
+alt="steam happy :D" title="image title" width="200" height="150"/>
