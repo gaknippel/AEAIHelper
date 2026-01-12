@@ -10,7 +10,8 @@ import {
 import "./main.scss";
 import'./styles.css';
 import SplitText from "../../ReactComponents/SplitText/SplitText";
-import Prism from "../../ReactComponents/Prism/Prism";
+import LightRays from "../../ReactComponents/LightRays/LightRays";
+import './App.css'
 
 function delay(ms: number)
 {
@@ -103,7 +104,8 @@ export function App() {
   };
 
 return (
-    <div className="bg-[#333333] text-gray-200 min-h-screen font-sans p-4">
+    <div className="text-gray-200 min-h-screen font-sans p-4">
+      
       <div className="max-w-md mx-auto">
         <header className="mb-6 text-center">
 
